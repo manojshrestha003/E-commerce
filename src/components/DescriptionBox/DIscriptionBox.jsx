@@ -1,12 +1,12 @@
 import React from 'react'
-import './descriptionBox.css'
+import './DiscriptionBox.css'
 
 const DIscriptionBox = () => {
   return (
     <div className='descriptionBox '>
         <div className="discriptionBox-navigator">
             <div className="descriptionBox-nav-box">Description</div>
-            <div className="descrtpitonBox-nav-box fade">Reviews(222) </div>
+            <div className=" descriptionBox-nav-box fade">Reviews(222) </div>
         </div>
         <div className="descriptionbox-description">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, non corporis libero aliquid dolorum quam atque cumque odio ut sed recusandae maxime necessitatibus quae, voluptatum nam aperiam a consectetur error? Sint illo commodi minus.</p>

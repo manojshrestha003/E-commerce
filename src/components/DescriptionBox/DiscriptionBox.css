@@ -16,7 +16,7 @@
     height: 70px;
     border: 1px solid #d0d0d0;
 }
-.descriptionBox-nav-box .fade{
+.descriptionBox-nav-box.fade{
     background: #FBFBFB;
     color: #555;
 }
