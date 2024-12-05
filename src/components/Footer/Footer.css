@@ -58,3 +58,30 @@
     height: 3px;
     background-color: #cfcfcf;
 }
+
+@media(max-width:800){
+    .footer{
+        gap: 20px;
+
+    }
+    .footer-logo{
+        gap: 10px;
+        align-items:end;
+    }
+    .footer-logo img{
+        width: 40px;
+    }
+    .footer-logo p{
+        font-size: 25px;
+    }
+    .footer-links{
+        font-size: 14px;
+        gap: 10px;
+    }
+    .fopter-social-icon{
+        width: 22px;
+    }
+    .footerCopy-right{
+        font-size: 13px;
+    }
+}
