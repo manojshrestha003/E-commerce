@@ -1,17 +1,26 @@
-import React, { createContext, useState } from 'react'
-import all_product from '../assets/all_product'
+import React, { createContext, useState,useEffect } from 'react'
+
 
 
 export const ShopContext =  createContext(null)
 const getDefaultcart = () =>{
     let cart  = {};
-    for(let index = 0; index<all_product.length+1; index++){
+    for(let index = 0; index<300+1; index++){
         cart[index] = 0;
     }
     return cart ;
    }
 
 const ShopContextProvider = (props) =>{
+    const [all_product, setAllProduct]= useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:4000/allproducts')
+        .then((response)=>response.json())
+        .then((data)=>setAllProduct(data))
+
+    }, [])
+
     const [cartItem , setCartItems]= useState(getDefaultcart())
     
     const addToCart =(itemId)=>{
