@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
-import './CartItems.css'
-import { ShopContext } from '../Context/ShopContext'
-import remove_icon from '../assets/cart_cross_icon.png'
+import React, { useContext } from 'react';
+import './CartItems.css';
+import { ShopContext } from '../Context/ShopContext';
+import remove_icon from '../assets/cart_cross_icon.png';
 
 const CartItems = () => {
-    const { getTotalAmount, all_product, cartItem, removeFromCart} = useContext(ShopContext)
-    
+    const { getTotalAmount, all_product, cartItem, removeFromCart } = useContext(ShopContext);
+
     return (
-        <div className='cart-items'>
+        <div className="cart-items">
             <div className="cart-items-format-main">
                 <p>Products</p>
                 <p>Title</p>
@@ -19,9 +19,9 @@ const CartItems = () => {
             <hr />
             {all_product.map((e) => {
                 // Check if the item exists in the cart and quantity is greater than 0
-                if (cartItem[e.id] > 0) {
+                if ((cartItem?.[e.id] || 0) > 0) {
                     return (
-                        <div key={e.id}> {/* Added key to prevent React warnings */}
+                        <div key={e.id}>
                             <div className="cartItems-format cart-items-format-main">
                                 <img className="cartIconProduct-icon" src={e.image} alt={e.name} />
                                 <p>{e.name}</p>
@@ -37,43 +37,42 @@ const CartItems = () => {
                             </div>
                             <hr />
                         </div>
-                    )
+                    );
                 }
                 // Return null if condition is not met
                 return null;
             })}
             <div className="cartItems-down">
                 <div className="cartTotal">
-                    <h1>cart Totals</h1>
+                    <h1>Cart Totals</h1>
                     <div>
                         <div className="cartItes-totalItem">
                             <p>Subtotal</p>
-                            <p>${getTotalAmount}</p>
+                            <p>${getTotalAmount()}</p> {/* Fix: Call the function */}
                         </div>
                         <hr />
                         <div className="cartItes-totalItem">
                             <p>Shipping fee</p>
-                            <p>free</p>
+                            <p>Free</p>
                         </div>
                         <hr />
                         <div className="cartItes-totalItem">
                             <h3>Total</h3>
-                            <h3>${getTotalAmount()}</h3>
+                            <h3>${getTotalAmount()}</h3> {/* Fix: Call the function */}
                         </div>
-                       
                     </div>
                     <button>Proceed to checkout</button>
                 </div>
                 <div className="promoode">
-                    <p>If you have a promocode enter here </p>
+                    <p>If you have a promocode, enter it here:</p>
                     <div className="ca">
-                        <input type="text" placeholder='promocode' />
-                        <button>submit</button>
+                        <input type="text" placeholder="Promocode" />
+                        <button>Submit</button>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CartItems
+export default CartItems;
