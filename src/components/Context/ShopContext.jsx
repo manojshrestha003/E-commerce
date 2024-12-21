@@ -20,9 +20,32 @@ const ShopContextProvider = (props) => {
       .then((response) => response.json())
       .then((data) => {
         setAllProduct(data);
-        setCartItems(getDefaultCart(data)); // Initialize cart with actual products
-      });
+        setCartItems(getDefaultCart(data));
+      })
+      .catch((error) => console.error('Error fetching products:', error));
+  
+    if (localStorage.getItem('auth-token')) {
+      fetch('http://localhost:4000/getcart', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Content-Type': 'application/json',
+        },
+        body:"",
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            const text = await res.text();
+            throw new Error(`HTTP error! status: ${res.status}, body: ${text}`);
+          }
+          return res.json();
+        })
+        .then((data) => setCartItems(data))
+        .catch((error) => console.error('Error fetching cart:', error));
+    }
   }, []);
+  
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));

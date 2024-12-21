@@ -2,9 +2,32 @@ import React, { useContext } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../Context/ShopContext';
 import remove_icon from '../assets/cart_cross_icon.png';
-
+import axios from 'axios';
 const CartItems = () => {
     const { getTotalAmount, all_product, cartItem, removeFromCart } = useContext(ShopContext);
+    const handlePayment = async () => {
+        const paymentData = {
+          amount: 1000, // Amount in paisa (1000 = Rs. 10)
+          purchase_order_id: 'Order12345',
+          purchase_order_name: 'Test Order',
+          customer_info: {
+            name: 'Ram Bahadur',
+            email: 'ram@example.com',
+            phone: '9800000001',
+          },
+        };
+      
+        try {
+          const response = await axios.post('http://localhost:4000/payment', paymentData);
+          console.log('Payment initiation successful:', response.data);
+          // Redirect to the Khalti payment page
+          window.location.href = response.data.data.payment_url; // Assuming Khalti returns a URL to redirect to
+        } catch (error) {
+          console.error('Error initiating payment:', error);
+          alert('Payment initiation failed!');
+        }
+      };
+      
 
     return (
         <div className="cart-items">
@@ -61,7 +84,7 @@ const CartItems = () => {
                             <h3>${getTotalAmount()}</h3> {/* Fix: Call the function */}
                         </div>
                     </div>
-                    <button>Proceed to checkout</button>
+                    <button onClick={handlePayment}>Proceed to checkout</button>
                 </div>
                 <div className="promoode">
                     <p>If you have a promocode, enter it here:</p>
