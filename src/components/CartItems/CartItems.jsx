@@ -7,7 +7,7 @@ const CartItems = () => {
     const { getTotalAmount, all_product, cartItem, removeFromCart } = useContext(ShopContext);
     const handlePayment = async () => {
         const paymentData = {
-          amount: 1000, // Amount in paisa (1000 = Rs. 10)
+          amount: getTotalAmount()*100, // Amount in paisa (1000 = Rs. 10)
           purchase_order_id: 'Order12345',
           purchase_order_name: 'Test Order',
           customer_info: {
